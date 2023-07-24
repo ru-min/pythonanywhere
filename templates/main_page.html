@@ -6,7 +6,7 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 
-        <title>My scratchboard page</title>
+        <title>Rumin's scratchboard page</title>
     </head>
 
     <body>
@@ -19,13 +19,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">My scratchpad</a>
+                    <a class="navbar-brand" href="#">Tan Rumin</a><br>
+                    <a href=https://www.linkedin.com/in/rumin-tan/>Linkedin profile</a><br>
+                    <a href=mailto:tan.rumin@gmail.com>Contact me</a>
                 </div>
             </div>
         </nav>
 
         <div class="container">
-
+#
             {% for comment in comments %}
                 <div class="row">
                     {{ comment.content }}
