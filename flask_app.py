@@ -25,13 +25,15 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(4096))
 
-comments = []
+#comments = []
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
-        return render_template("main_page.html", comments=comments)
+        return render_template("main_page.html", comments=Comment.query.all())
 
-    comments.append(request.form["contents"])
+    comment = Comment(content=request.form["contents"])                                 #creates the Python object that represents the comment, but doesn’t store it in the database
+    db.session.add(comment)                                                             #sends the command to the database to store it, but leaves a transaction open
+    db.session.commit()                                                                 #commit immediately, which closes the transaction and stores everything
     return redirect(url_for('index'))
 

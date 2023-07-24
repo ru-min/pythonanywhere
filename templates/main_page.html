@@ -28,13 +28,13 @@
 
             {% for comment in comments %}
                 <div class="row">
-                    {{ comment }}
+                    {{ comment.content }}
                 </div>
             {% endfor %}
 
             <div class="row">
                 <form action="." method="POST">
-                    <textarea class="form-control" name="contents" placeholder="Enter a comment"></textarea>
+                    <textarea name="contents" placeholder="Enter a comment" class="form-control"></textarea>
                     <input type="submit" class="btn btn-success" value="Post comment">
                 </form>
             </div>
