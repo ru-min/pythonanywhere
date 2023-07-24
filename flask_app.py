@@ -16,6 +16,7 @@ SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostnam
 app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
 db = SQLAlchemy(app)
 
 class Comment(db.Model):
@@ -25,7 +26,7 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(4096))
 
-comments = []
+#comments = []
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -37,3 +38,7 @@ def index():
     db.session.commit()
     return redirect(url_for('index'))
 
+'''@app.route("/login/")
+def login():
+    return render_template("login_page.html")
+'''
