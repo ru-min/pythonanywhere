@@ -19,24 +19,26 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Tan Rumin</a><br>
+                    <a class="navbar-brand" href="#"><b>Tan Rumin</b></a><br>
                     <a href=https://www.linkedin.com/in/rumin-tan/>Linkedin profile</a><br>
                     <a href=mailto:tan.rumin@gmail.com>Contact me</a>
                 </div>
             </div>
         </nav>
 
+        <p style="text-align:center;">This is my first Web App. Feel free to leave your comment below.</p>
+
         <div class="container">
-#
+
             {% for comment in comments %}
                 <div class="row">
-                    {{ comment }}
+                    {{ comment.content }}
                 </div>
             {% endfor %}
 
             <div class="row">
                 <form action="." method="POST">
-                    <textarea class="form-control" name="contents" placeholder="Enter a comment"></textarea>
+                    <textarea name="contents" placeholder="Enter a comment" class="form-control"></textarea>
                     <input type="submit" class="btn btn-success" value="Post comment">
                 </form>
             </div>
