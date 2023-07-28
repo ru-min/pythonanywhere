@@ -7,6 +7,7 @@ from flask_migrate import Migrate
 from flask_login import login_user, LoginManager, UserMixin, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash
 from datetime import datetime
+from pytz import timezone
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -24,7 +25,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-app.secret_key = "sfggj krtyga sfbhgj"
+app.secret_key = "sfggjkrtygasfbhgj"
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -46,13 +47,18 @@ class User(UserMixin, db.Model):
 def load_user(user_id):
     return User.query.filter_by(username=user_id).first()
 
+#convert to local singapore time
+local_now = datetime.now()
+sg_timezone = timezone('Asia/Singapore')
+sg_time = local_now.astimezone(sg_timezone)
+
 class Comment(db.Model):
 
     __tablename__ = "comments"
 
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(4096))
-    posted = db.Column(db.DateTime, default=datetime.now)
+    posted = db.Column(db.DateTime, default=sg_time)
     commenter_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     commenter = db.relationship('User', foreign_keys=commenter_id)
 
