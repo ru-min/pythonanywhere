@@ -1,5 +1,6 @@
 def calculate(weight, height):
     try:
+        height = height/100
         bmi = weight / (height ** 2)
         bmi = round(bmi, 1)
     except ZeroDivisionError:
