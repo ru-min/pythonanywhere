@@ -49,12 +49,11 @@ def load_user(user_id):
     return User.query.filter_by(username=user_id).first()
 
 class Comment(db.Model):
-
     __tablename__ = "comments"
 
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(4096))
-    posted = db.Column(db.DateTime, default=datetime.now)
+    posted = db.Column(db.DateTime, default=lambda: datetime.now(timezone('Asia/Singapore')))
     commenter_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     commenter = db.relationship('User', foreign_keys=commenter_id)
 
@@ -62,15 +61,14 @@ class Comment(db.Model):
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    sg_timezone = timezone('Asia/Singapore')
-    sg_time = datetime.now(sg_timezone)
+
     if request.method == "GET":
         return render_template("main_page.html", comments=Comment.query.all())
 
     if not current_user.is_authenticated:                                       #check whether user is logged in, before saving his comment in database
         return redirect(url_for('index'))
 
-    comment = Comment(content=request.form["contents"], posted=sg_time)
+    comment = Comment(content=request.form["contents"], commenter=current_user)
     db.session.add(comment)
     db.session.commit()
     return redirect(url_for('index'))
