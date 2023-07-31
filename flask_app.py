@@ -8,6 +8,7 @@ from flask_login import login_user, LoginManager, UserMixin, logout_user, login_
 from werkzeug.security import check_password_hash
 from datetime import datetime
 from pytz import timezone
+from flask_bmi import calculate
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -76,6 +77,18 @@ def index():
     db.session.add(comment)
     db.session.commit()
     return redirect(url_for('index'))
+
+
+@app.route("/bmi_calculator/", methods=["GET", "POST"])
+def bmi_calc():
+    if request.method == "POST":
+        height = request.form.get("height", type=float)
+        weight = request.form.get("weight", type=float)
+        if request.method == 'POST' and height is not None and weight is not None:
+            bmi = calculate(weight, height)
+        return render_template("bmi_page.html", result=bmi)
+    else:
+        return render_template("bmi_page.html")
 
 @app.route("/login/", methods=["GET", "POST"])
 def login():

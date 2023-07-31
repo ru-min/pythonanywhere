@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
+        <title>BMI Calculator</title>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">My scratchpad</a>
+                    <a class="navbar-brand" href="/bmi_calculator">BMI calculator</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+
+            <div class="row">
+                <form action="." method="POST">
+
+                <div class="form-group">
+                    <label for="height">Height (in metres):</label>
+                    <input class="form-control" id="height" name="height" placeholder="Enter your height e.g. 1.80">
+                </div>
+
+                <div class="form-group">
+                    <label for="weight">Weight (in kilograms):</label>
+                    <input type="form-control" class="form-control" id="weight" name="weight" placeholder="Enter your weight e.g. 70">
+                </div>
+
+                <button type="submit" class="btn btn-success">Calculate</button>
+                <br>
+                <br>
+                <fieldset disabled>
+                    <div class="form-group">
+                		<label class="control-label">Result :</label>
+                        <div class="row">
+                		    <input type="text" id="disabledTextInput" name="result" class="form-control" placeholder="{{ result }}kg/m²">
+                		</div>
+                	</div>
+                </fieldset>
+                </form>
+            </div>
+
+        </div>
+
+    </body>
+</html>
