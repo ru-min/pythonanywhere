@@ -78,15 +78,25 @@ def index():
     db.session.commit()
     return redirect(url_for('index'))
 
-
 @app.route("/bmi_calculator/", methods=["GET", "POST"])
 def bmi_calc():
-    if request.method == "POST":
+    if request.method == 'POST':
         height = request.form.get("height", type=float)
         weight = request.form.get("weight", type=float)
-        if request.method == 'POST' and height is not None and weight is not None:
+        if height is None or weight is None:
+            error_message = "Please enter both height and weight."
+            return render_template("bmi_page.html", error=error_message)
+        else:
             bmi = calculate(weight, height)
-        return render_template("bmi_page.html", result=bmi)
+            if bmi <= 18.5:
+                health = "You are underweight! Eat more."
+            elif bmi <= 22.9:
+                health = "Congrats! You are healthy."
+            elif bmi <= 29.9:
+                health = "You are overweight. Watch your diet."
+            else:
+               health = "You are Obese! You need to reduce your weight now! "
+            return render_template("bmi_page.html", result=bmi, status=health)
     else:
         return render_template("bmi_page.html")
 
