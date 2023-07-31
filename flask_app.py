@@ -48,18 +48,13 @@ class User(UserMixin, db.Model):
 def load_user(user_id):
     return User.query.filter_by(username=user_id).first()
 
-#convert to local singapore time
-local_now = datetime.now()
-sg_timezone = timezone('Asia/Singapore')
-sg_time = local_now.astimezone(sg_timezone)
-
 class Comment(db.Model):
 
     __tablename__ = "comments"
 
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(4096))
-    posted = db.Column(db.DateTime, default=sg_time)
+    posted = db.Column(db.DateTime, default=datetime.now)
     commenter_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     commenter = db.relationship('User', foreign_keys=commenter_id)
 
@@ -67,13 +62,15 @@ class Comment(db.Model):
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    sg_timezone = timezone('Asia/Singapore')
+    sg_time = datetime.now(sg_timezone)
     if request.method == "GET":
         return render_template("main_page.html", comments=Comment.query.all())
 
     if not current_user.is_authenticated:                                       #check whether user is logged in, before saving his comment in database
         return redirect(url_for('index'))
 
-    comment = Comment(content=request.form["contents"], commenter=current_user)
+    comment = Comment(content=request.form["contents"], posted=sg_time)
     db.session.add(comment)
     db.session.commit()
     return redirect(url_for('index'))

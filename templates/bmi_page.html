@@ -7,6 +7,14 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 
         <title>BMI Calculator</title>
+        <style>
+            body {
+                background-image: url("https://pimages.toolbox.com/wp-content/uploads/2022/09/19101932/Cloud-computing-concept-or-symbol-connect-with-network-cable-on-blue-background..jpg");
+                background-position: 0 50px;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+        </style>
     </head>
 
     <body>
@@ -20,7 +28,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="/">Scratchpad</a>
-                    <a class="navbar-brand" href="/bmi_calculator">BMI calculator</a>
+                    <a class="navbar-brand" href="/bmi_calculator">BMI</a>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     {% if current_user.is_authenticated %}
@@ -32,8 +40,9 @@
             </div>
         </nav>
 
-            </div>
-        </nav>
+        <header style="text-align: center;">
+            <h2><b>BMI calculator</b></h2>
+        </header>
 
         <div class="container">
 
@@ -42,18 +51,16 @@
 
                 <div class="form-group">
                     <label for="height">Height (in metres):</label>
-                    <input class="form-control" id="height" name="height" type="number" step="0.01" placeholder="Enter your height e.g. 1.8" value="{{request.form['height'] }}">
+                    <input class="form-control" min="0" id="height" name="height" type="number" step="0.01" placeholder="Enter your height e.g. 1.8" value="{{request.form['height'] }}">
                 </div>
 
                 <div class="form-group">
                     <label for="weight">Weight (in kilograms):</label>
-                    <input class="form-control" id="weight" name="weight" type="number" step="0.01" placeholder="Enter your weight e.g. 70" value="{{request.form['weight'] }}">
+                    <input class="form-control" min="0" id="weight" name="weight" type="number" step="0.01" placeholder="Enter your weight e.g. 70" value="{{request.form['weight'] }}">
                 </div>
 
                 <div class="form-group">
-                    <form action="/bmi_calculator/" method="POST">
-                        <button type="submit" class="btn btn-success">Calculate</button>
-                    </form>
+                    <button type="submit" class="btn btn-success">Calculate</button>
                     {% if error %}
                         <p>{{ error }}</p>
                     {% endif %}
