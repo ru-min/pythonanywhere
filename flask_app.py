@@ -8,7 +8,7 @@ from flask_login import login_user, LoginManager, UserMixin, logout_user, login_
 from werkzeug.security import check_password_hash
 from datetime import datetime
 from pytz import timezone
-from flask_bmi import calculate
+from flask_bmi import calculate, health
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -83,15 +83,8 @@ def bmi_calc():
             return render_template("bmi_page.html", error=error_message)
         else:
             bmi = calculate(weight, height)
-            if bmi <= 18.5:
-                health = "You are underweight! Eat more."
-            elif bmi <= 22.9:
-                health = "Congrats! You are healthy."
-            elif bmi <= 29.9:
-                health = "You are overweight. Watch your diet."
-            else:
-               health = "You are Obese! You need to reduce your weight now! "
-            return render_template("bmi_page.html", result=bmi, status=health)
+            status = health(bmi)
+            return render_template("bmi_page.html", result=bmi, status=status)
     else:
         return render_template("bmi_page.html")
 
