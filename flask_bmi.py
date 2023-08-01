@@ -10,9 +10,9 @@ def calculate(weight, height):
 def health(bmi):
     if bmi < 9:
         health = "Please enter a valid height and weight values."
-    elif bmi <= 18.5:
+    elif bmi < 18.5:
         health = "You are underweight! Eat more."
-    elif bmi <= 22.9:
+    elif bmi <= 24.9:
         health = "Congrats! You are in the healthy range."
     elif bmi <= 29.9:
         health = "You are overweight! Watch your diet."
