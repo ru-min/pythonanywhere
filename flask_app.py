@@ -103,6 +103,10 @@ def login():
     login_user(user)
     return redirect(url_for('index'))
 
+@app.route("/pw/")
+def pw():
+    return render_template("pw_page.html")
+
 @app.route("/logout/")
 @login_required
 def logout():
