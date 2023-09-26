@@ -1,2 +1,7 @@
 # pythonanywhere
-A website using Python, Flask &amp; MySQL Database
+A web App using Python, Flask, MySQL Database
+with following features
+- Comment page (message, username, timestamp)
+- Login page (username, password)
+- BMI calculator (height, weight and remarks)
+
